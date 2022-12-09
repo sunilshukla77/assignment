@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration strict="true">
+
+    <Appenders>
+        <RollingFile name="APP_FILE" fileName="application.log"
+                     filePattern="application-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[logLevel=%-5p]-- [Application Name: ${bundle:application:spring.application.name}, Trace Id: %X{traceId}, Span Id: %X{spanId}] -- %d %d{Z} -- %t %c - %m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.theatre" level="DEBUG" additivity="false">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="org.hibernate" level="INFO" additivity="false">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Root level="WARN">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
