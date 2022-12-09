@@ -23,11 +23,11 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
             String line;
             while ((line = reader.readLine()) != null) {
                 event = new ObjectMapper().readValue(line, Event.class);
-                log.trace("{}", event.toString());
+                log.info("Read line {}", event.toString());
             }
 
         } catch (IOException e) {
-            log.trace("{}", e.getCause());
+            log.error("Analysis File exception {}", e.getCause());
         }
         return 0;
     }
