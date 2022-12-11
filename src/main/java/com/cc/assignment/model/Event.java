@@ -12,7 +12,7 @@ public class Event {
     private State state;
 
     @JsonProperty("type")
-    private EventType type;
+    private String type;
 
     @JsonProperty("host")
     private String host;
